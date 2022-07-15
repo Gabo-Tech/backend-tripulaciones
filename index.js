@@ -1,22 +1,21 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import dotenv from 'dotenv';
-
-
+const express = require("express");
 const app = express();
-dotenv.config();
-const PORT = process.env.PORT || 8080;
+require("dotenv").config();
+const bodyParser = require ("body-parser");
+const PORT = process.env.PORT || 3001;
+const { dbConnection } = require ("./config/config");
+const cors = require('cors');
 
-app.use(bodyParser.json({ limit: "30mb", extended: true}));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
+dbConnection();
+
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 app.use(cors());
 
 //Espacio para rutas
+app.use("/users", require("./routes/users"));
 
+module.exports = app;
 
-
-mongoose.connect(process.env.CONNECT_DATABASE).then(() => app.listen(PORT, () => (console.info(`Succesfully connected to the database...`),console.info(`Server running on port: ${PORT}...`))))
-    .catch((err) => console.error("THIS IS THE DATABASE CONNECTION ERROR:",err.message));
+app.listen(PORT, console.info(`Server running on port: ${PORT}...`));
