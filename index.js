@@ -16,6 +16,7 @@ app.use(cors());
 
 //Espacio para rutas
 app.use("/users", require("./routes/users"));
+app.use("/routes",require("./routes/routes"));
 
 //error middleware
 app.use(typeError);

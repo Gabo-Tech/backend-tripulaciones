@@ -30,7 +30,7 @@ const UserController = {
       res
         .status(201)
         .send({
-          message: "We've just send you a conformation email",
+          message: "Te hemos enviado un correo de confirmación",
           user,
         });
     } catch (error) {
@@ -48,7 +48,7 @@ const UserController = {
     } catch (error) {
       res
         .status(500)
-        .send({ message: "We had a problem with the login" });
+        .send({ message: "Hubo un problema con el login" });
     }
   },
   async confirm(req, res) {
@@ -59,7 +59,7 @@ const UserController = {
         { mail: payload.email },
         { $set: { confirmed: true } }
       );
-      res.status(201).send("User confirmed succesfully!");
+      res.status(201).send("Usuario confirmado!");
     } catch (error) {
       console.error(error);
     }
@@ -69,12 +69,12 @@ const UserController = {
       await User.findByIdAndUpdate(req.user._id, {
         $pull: { tokens: req.headers.authorization },
       });
-      res.status(200).send({ message: "Log Out succesfull!" });
+      res.status(200).send({ message: "Desconectado correctamente!" });
     } catch (error) {
       res
         .status(500)
         .send({
-          message: "We had a problem loggin out the user",
+          message: "Hubo un problema desconectando al usuario",
         });
     }
   },
@@ -90,7 +90,7 @@ const UserController = {
     } catch (error) {
       res
         .status(500)
-        .send({ message: "We had a problem getting the user list" });
+        .send({ message: "Tuvimos un problema recuperando los usuarios" });
     }
   },
 };
