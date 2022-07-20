@@ -1,10 +1,11 @@
 const express = require("express");
 const app = express();
 require("dotenv").config();
-const bodyParser = require ("body-parser");
+const { typeError } = require("./middleware/errors");
+const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 3001;
-const { dbConnection } = require ("./config/config");
-const cors = require('cors');
+const { dbConnection } = require("./config/config");
+const cors = require("cors");
 
 dbConnection();
 
@@ -15,6 +16,9 @@ app.use(cors());
 
 //Espacio para rutas
 app.use("/users", require("./routes/users"));
+
+//error middleware
+app.use(typeError);
 
 module.exports = app;
 
