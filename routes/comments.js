@@ -5,14 +5,8 @@ const {
   authentication,
   isAuthorComment,
 } = require("../middleware/authentication");
-const { uploadCommentImages } = require("../middleware/multer");
 
-router.post(
-  "/",
-  authentication,
-  uploadCommentImages.single("imageComment"),
-  CommentController.create
-);
+router.post("/", CommentController.create);
 router.get("/", CommentController.getAll);
 router.delete(
   "/id/:_id",
@@ -24,7 +18,6 @@ router.put(
   "/id/:_id",
   authentication,
   isAuthorComment,
-  uploadCommentImages.single("imageComment"),
   CommentController.update
 );
 router.put("/likes/:_id", authentication, CommentController.like);
