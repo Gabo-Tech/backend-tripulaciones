@@ -1,10 +1,15 @@
 const axios = require("axios");
+const Route = require("../models/Route");
+const mongoose = require('mongoose');
+const db = mongoose.connection;
 
 const RoutesController = {
     async getAllRoutes(req, res) {
         try {
-            const result = await axios("https://pilgrimtests.000webhostapp.com/mockapi/getall/");            
-            res.status(201).send([result.data]);
+            const result = await axios("https://pilgrimtests.000webhostapp.com/mockapi/getall/");
+            await db.dropCollection("routes");
+            const RoutesCollection = await Route.create(...result.data);                       
+            res.status(201).send([RoutesCollection]);
         } catch (error) {
             console.error(error);
             res.send({ message: "Hubo un problema obteniendo las rutas" });

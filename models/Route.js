@@ -13,7 +13,14 @@ const RouteSchema = new mongoose.Schema({
     endingPoint: String,    
     description: String,
     tags:[],
-    pois:[]
+    pois:[{
+        id: String,
+        name: String,
+        description: String,
+        Image: String,
+        latitude: Number,
+        longitude: Number,
+      }]
 }, {timestamps: true});
 
 
