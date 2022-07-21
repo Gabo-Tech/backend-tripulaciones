@@ -11,15 +11,21 @@ const RouteSchema = new mongoose.Schema({
     duration: Number,
     startingPoint: String,
     endingPoint: String,    
-    description: String,
-    tags:[],
-    pois:[{
-        id: String,
+    description_es: String,
+    description_va: String,
+    description_en: String,
+    transport: String,
+    type: String,
+    url:String,
+    poi:[{
+        poi_id: Number,
         name: String,
-        description: String,
-        Image: String,
+        description_es: String,
+        description_va: String,
+        description_en: String,
         latitude: Number,
         longitude: Number,
+        Image: String,
       }]
 }, {timestamps: true});
 
