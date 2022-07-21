@@ -6,7 +6,7 @@ const db = mongoose.connection;
 const RoutesController = {
     async getAllRoutes(req, res) {
         try {
-            const result = await axios("https://pilgrimtests.000webhostapp.com/mockapi/getall/");
+            const result = await axios("https://api-routes-data.herokuapp.com/getRoutes/");
             await db.dropCollection("routes");
             const RoutesCollection = await Route.create(...result.data);                       
             res.status(201).send([RoutesCollection]);
@@ -17,13 +17,31 @@ const RoutesController = {
     },
     async getRouteById (req,res) {
         try {
-            const result = await axios(`https://pilgrimtests.000webhostapp.com/mockapi/getById/${req.params.id}`);
+            const result = await axios(`https://api-routes-data.herokuapp.com/getRouteById/?id=${req.params.id}`);
             res.status(201).send([result.data]);
         } catch (error) {
             console.error(error);
             res.send({ message: "Hubo un problema obteniendo la ruta" });
         }
-    }
+    },
+    async getAllPois(req, res) {
+        try {
+            const result = await axios("https://api-routes-data.herokuapp.com/getPoi/");                      
+            res.status(201).send([result.data]);
+        } catch (error) {
+            console.error(error);
+            res.send({ message: "Hubo un problema obteniendo los pois" });
+        }
+    },
+    async getPoiById (req,res) {
+        try {
+            const result = await axios(`https://api-routes-data.herokuapp.com/getPoiById/?id=${req.params.id}`);
+            res.status(201).send([result.data]);
+        } catch (error) {
+            console.error(error);
+            res.send({ message: "Hubo un problema obteniendo el poi" });
+        }
+    },
 };
 
 module.exports = RoutesController;
