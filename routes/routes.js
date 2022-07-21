@@ -7,5 +7,6 @@ router.get("/", RoutesController.getAllRoutes);
 router.get("/getById/:id", authentication, RoutesController.getRouteById);
 router.get("/pois", RoutesController.getAllPois);
 router.get("/getById/pois/:id", RoutesController.getRouteById);
+router.get("/getAlldb", RoutesController.getAll);
 
 module.exports = router;
