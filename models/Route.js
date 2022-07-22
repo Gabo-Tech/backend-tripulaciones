@@ -25,6 +25,10 @@ const RouteSchema = new mongoose.Schema({
       },
     ],
     likes: [{ type: ObjectId }],
+    ratingId: [{
+        type: ObjectId,
+        ref: 'Rating'
+      }],
     poi:[{
         poi_id: Number,
         name: String,

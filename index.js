@@ -18,6 +18,7 @@ app.use(cors());
 app.use("/users", require("./routes/users"));
 app.use("/routes",require("./routes/routes"));
 app.use("/comments",require("./routes/comments"));
+app.use("/ratings", require("./routes/ratings"));
 
 //error middleware
 app.use(typeError);

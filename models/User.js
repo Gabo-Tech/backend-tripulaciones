@@ -22,7 +22,11 @@ const UserSchema = new mongoose.Schema({
     confirmed: Boolean,
     role: String,
     commentIds: [{ type: ObjectId, ref: "Comment"}],
-    likes: [{ type: ObjectId, ref: 'Route' }]
+    likes: [{ type: ObjectId, ref: 'Route' }],
+    ratingId: [{
+        type: ObjectId,
+        ref: 'Score'
+      }]
 }, {timestamps: true});
 
 UserSchema.methods.toJSON = function () {
