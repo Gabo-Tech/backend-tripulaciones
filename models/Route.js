@@ -24,6 +24,7 @@ const RouteSchema = new mongoose.Schema({
         ref: "Comment",
       },
     ],
+    likes: [{ type: ObjectId }],
     poi:[{
         poi_id: Number,
         name: String,

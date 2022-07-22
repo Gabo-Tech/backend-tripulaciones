@@ -1,7 +1,7 @@
 const { send } = require("express/lib/response");
 
 const handleValidationError = (err, res) => {
-  let errors = Object.values(err.errors).map((el) => el.message); //Objet.values nos transforma el objeto (entre paréntesis) en un array para poder aplicar métodos de arrays
+  let errors = Object.values(err.errors).map((el) => el.message); 
   if (errors.length > 1) {
     let chain = "";
     for (let i = 0; i < errors.length; i++) {
@@ -24,8 +24,8 @@ const typeError = (err, req, res, next) => {
     res.status(500).send("We had an issue creating the User...");
   } else if (errOrigin === "Comment") {
     res.status(500).send("We had an issue creating the Comment...");
-  } else if (errOrigin === "Post") {
-    res.status(500).send("We had an issue creating the Post...");
+  } else if (errOrigin === "Route") {
+    res.status(500).send("We had an issue creating the Route...");
   } else {
     res.status(500).send("There is an error in your sintaxis...");
   }

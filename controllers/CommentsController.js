@@ -17,7 +17,7 @@ const CommentController = {
           $push: { commentsId: comment._id },
         });
         await User.findByIdAndUpdate(req.user._id, {
-          $push: { commentsId: comment._id },
+          $push: { commentIds: comment._id },
         });
         res.status(201).send({message: "comentario creado", comment});
        

@@ -1,5 +1,7 @@
 const axios = require("axios");
 const Route = require("../models/Route");
+const User = require("../models/User");
+const Comment = require("../models/Comment");
 const mongoose = require("mongoose");
 const db = mongoose.connection;
 
@@ -54,8 +56,8 @@ const RoutesController = {
     try {
       const { page = 1, limit = 10 } = req.query;
       const routes = await Route.find()
-      .limit(limit * 1)
-      .skip((page - 1) * limit);
+        .limit(limit * 1)
+        .skip((page - 1) * limit);
       res.send(routes);
     } catch (error) {
       console.log(error);
@@ -64,19 +66,61 @@ const RoutesController = {
   },
   async getById(req, res) {
     try {
-      const route = await Route.findById(req.params._id)
-      .populate({
-        path:"commentsId",
+      const route = await Route.findById(req.params._id).populate({
+        path: "commentsId",
         populate: {
-          path: "userId"
-        }
-      })
-      res.send(route)
+          path: "userId",
+        },
+      });
+      res.send(route);
     } catch (error) {
       console.error(error);
-      res.status(500).send(
-        { message: 'Ha habido un problema al cargar la ruta' }
-      )
+      res
+        .status(500)
+        .send({ message: "Ha habido un problema al cargar la ruta" });
+    }
+  },
+  async like(req, res) {
+    try {
+      const route = await Route.findById(req.params._id);
+      if (route.likes.includes(req.user._id)) {
+        res.send("Ya le diste a like a este post");
+      } else {
+        const route = await Route.findByIdAndUpdate(
+          req.params._id,
+          { $push: { likes: req.user._id } },
+          { new: true }
+        );
+        await User.findByIdAndUpdate(
+          req.user._id,
+          { $push: { likes: req.params._id } },
+          { new: true }
+        );
+        res.status(201).send(route);
+      }
+    } catch (error) {
+      res
+        .status(500)
+        .send({ message: "Hubo un problema con tu like a la ruta" });
+    }
+  },
+  async dislike(req, res) {
+    try {
+      const route = await Route.findByIdAndUpdate(
+        req.params._id,
+        { $pull: { likes: req.user._id } },
+        { new: true }
+      );
+      await User.findByIdAndUpdate(
+        req.user._id,
+        { $pull: { likes: req.params._id } },
+        { new: true }
+      );
+      res.status(201).send(route);
+    } catch (error) {
+      res
+        .status(500)
+        .send({ message: "Hubo un problema con tu dislike a la ruta" });
     }
   },
 };
