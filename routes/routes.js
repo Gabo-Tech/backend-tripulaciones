@@ -5,8 +5,9 @@ const { authentication } = require("../middleware/authentication");
 
 router.get("/", RoutesController.getAllRoutes);
 router.get("/getById/:id", authentication, RoutesController.getRouteById);
-router.get("/pois", RoutesController.getAllPois);
-router.get("/getById/pois/:id", RoutesController.getRouteById);
-router.get("/getAlldb", RoutesController.getAll);
+router.get("/pois", authentication, RoutesController.getAllPois);
+router.get("/getById/pois/:id", authentication, RoutesController.getRouteById);
+router.get("/getAlldb", authentication, RoutesController.getAll);
+router.get("/getByIddb/:_id", authentication, RoutesController.getById);
 
 module.exports = router;

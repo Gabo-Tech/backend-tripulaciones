@@ -17,6 +17,13 @@ const RouteSchema = new mongoose.Schema({
     transport: String,
     type: String,
     url:String,
+    userId: { type: ObjectId, ref: "User" },
+    commentsId: [
+      {
+        type: ObjectId,
+        ref: "Comment",
+      },
+    ],
     poi:[{
         poi_id: Number,
         name: String,

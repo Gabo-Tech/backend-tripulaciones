@@ -62,6 +62,23 @@ const RoutesController = {
       res.status(500).send({ message: "Hubo un problema cargando las rutas" });
     }
   },
+  async getById(req, res) {
+    try {
+      const route = await Route.findById(req.params._id)
+      .populate({
+        path:"commentsId",
+        populate: {
+          path: "userId"
+        }
+      })
+      res.send(route)
+    } catch (error) {
+      console.error(error);
+      res.status(500).send(
+        { message: 'Ha habido un problema al cargar la ruta' }
+      )
+    }
+  },
 };
 
 module.exports = RoutesController;

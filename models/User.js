@@ -16,12 +16,13 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide a password"],
     },
-    gender: String,
+    genre: String,
     age: { type: Number, min: 18, max: 85 },
     tokens:[],
     confirmed: Boolean,
     role: String,
-    commentIds: [{ type: ObjectId, ref: "Comment"}]
+    commentIds: [{ type: ObjectId, ref: "Comment"}],
+    likes: [{ type: ObjectId, ref: 'Route' }]
 }, {timestamps: true});
 
 UserSchema.methods.toJSON = function () {
