@@ -30,9 +30,28 @@ const RatingsController = {
       res.status(200).send({ ratings });
     } catch (error) {
       console.log(error);
-      res
-        .status(500)
-        .send({ message: "No se pudieron conseguir las puntuaciones" });
+      res.status(500).send({ message: "No se pudieron conseguir las puntuaciones" });
+    }
+  },
+  async averageRating (req, res) {
+    try {
+      const allRatings = await Rating.find();
+      let sum = 0;
+      let counter = 0;
+      const averageRating = allRatings.map( (rate) => {        
+        if (rate.routeId.toString().includes(req.params._id)){
+          sum = sum + rate.rating;
+          counter++;          
+        }               
+        return sum/counter;
+      })
+       
+      let lastItem=averageRating[averageRating.length-1];    
+      
+      
+      res.status(200).send({ lastItem });
+    } catch (error) {
+      console.error(error);
     }
   },
 };
