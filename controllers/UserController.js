@@ -6,7 +6,7 @@ require("dotenv").config();
 const JWT_SECRET = process.env.SECRET;
 
 const UserController = {
-  async create(req, res) {
+  async create(req, res, next) {
     try {      
       let password;
       if (req.body.password !== undefined) {
@@ -34,7 +34,9 @@ const UserController = {
           user,
         });
     } catch (error) {
-      console.error(error);      
+      console.log(error);
+      error.origin = "User";
+      next(error)      
     }
   },
   async login(req, res) {

@@ -19,7 +19,7 @@ const RatingsController = {
       res.status(201).send({ message: "Puntuado correctamente!", rating });
     } catch (error) {
       console.error(error);
-      error.origin = "score crear";
+      error.origin = "Rating";
       next(error);
     }
   },

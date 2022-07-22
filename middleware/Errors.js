@@ -26,6 +26,8 @@ const typeError = (err, req, res, next) => {
     res.status(500).send("We had an issue creating the Comment...");
   } else if (errOrigin === "Route") {
     res.status(500).send("We had an issue creating the Route...");
+  } else if (errOrigin === "Rating") {
+    res.status(500).send("We had an issue rating the Route...");
   } else {
     res.status(500).send("There is an error in your sintaxis...");
   }

@@ -23,7 +23,7 @@ const isAdmin = async (req, res, next) => {
   const admin = "admin";
   if (!admin.includes(req.user.role)) {
     return res.status(403).send({
-      message: "You are not ADMIN",
+      message: "No eres ADMIN",
     });
   }
   next();
@@ -33,32 +33,17 @@ const isAuthorComment = async (req, res, next) => {
   try {
     const post = await Comment.findById(req.params._id);
     if (post.userId.toString() !== req.user._id.toString()) {
-      return res.status(403).send({ message: "This comment is not yours" });
+      return res.status(403).send({ message: "Este comentario no es tuyo" });
     }
     next();
   } catch (error) {
     console.error(error);
     return res.status(500).send({
       error,
-      message: "There was a problem checking the authory of this comment",
+      message: "Hubo un problema al comprobar la autoría de este comentario",
     });
   }
 };
 
-// const isAuthorRoute = async (req, res, next) => {
-//   try {
-//     const post = await Route.findById(req.params._id);
-//     if (post.userId.toString() !== req.user._id.toString()) {
-//       return res.status(403).send({ message: "This post is not yours" });
-//     }
-//     next();
-//   } catch (error) {
-//     console.error(error);
-//     return res.status(500).send({
-//       error,
-//       message: "There was a problem checking the authory of this post",
-//     });
-//   }
-// };
 
 module.exports = { authentication, isAdmin, isAuthorComment };
