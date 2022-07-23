@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 require("dotenv").config();
-const { typeError } = require("./middleware/errors");
+const { typeError } = require("./middleware/Errors");
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 3001;
 const { dbConnection } = require("./config/config");
