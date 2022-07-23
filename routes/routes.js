@@ -4,10 +4,10 @@ const RoutesController = require("../controllers/RoutesController");
 const { authentication } = require("../middleware/Authentication");
 
 router.get("/", RoutesController.getAllRoutes);
-router.get("/getById/:id", RoutesController.getRouteById);
+router.get("/getById/:id", authentication, RoutesController.getRouteById);
 router.get("/pois", authentication, RoutesController.getAllPois);
 router.get("/getById/pois/:id", authentication, RoutesController.getRouteById);
-router.get("/getAlldb", authentication, RoutesController.getAll);
+router.get("/getAlldb", RoutesController.getAll);
 router.get("/getByIddb/:_id", authentication, RoutesController.getById);
 router.put("/likes/:_id", authentication, RoutesController.like);
 router.put("/dislike/:_id", authentication, RoutesController.dislike);
