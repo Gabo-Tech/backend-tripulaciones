@@ -84,7 +84,7 @@ const RoutesController = {
     try {
       const route = await Route.findById(req.params._id);
       if (route.likes.includes(req.user._id)) {
-        res.send("Ya le diste a like a este post");
+        res.send("Ya le diste a like a esta ruta");
       } else {
         const route = await Route.findByIdAndUpdate(
           req.params._id,

@@ -7,7 +7,7 @@ const JWT_SECRET = process.env.SECRET;
 
 const UserController = {
   async create(req, res, next) {
-    try {      
+    try {
       let password;
       if (req.body.password !== undefined) {
         password = bcrypt.hashSync(req.body.password, 10);
@@ -27,16 +27,14 @@ const UserController = {
       //     html: `<h3>Bienvenido, estás a un paso de registrarte </h3>
       //     <a href="${url}"> Click para confirmar tu registro</a>
       //     `,});
-      res
-        .status(201)
-        .send({
-          message: "Te hemos enviado un correo de confirmación",
-          user,
-        });
+      res.status(201).send({
+        message: "Te hemos enviado un correo de confirmación",
+        user,
+      });
     } catch (error) {
       console.log(error);
       error.origin = "User";
-      next(error)      
+      next(error);
     }
   },
   async login(req, res) {
@@ -48,9 +46,7 @@ const UserController = {
       await user.save();
       res.send({ message: "Welcome ", user, token });
     } catch (error) {
-      res
-        .status(500)
-        .send({ message: "Hubo un problema con el login" });
+      res.status(500).send({ message: "Hubo un problema con el login" });
     }
   },
   async confirm(req, res) {
@@ -73,11 +69,9 @@ const UserController = {
       });
       res.status(200).send({ message: "Desconectado correctamente!" });
     } catch (error) {
-      res
-        .status(500)
-        .send({
-          message: "Hubo un problema desconectando al usuario",
-        });
+      res.status(500).send({
+        message: "Hubo un problema desconectando al usuario",
+      });
     }
   },
 
@@ -93,6 +87,25 @@ const UserController = {
       res
         .status(500)
         .send({ message: "Tuvimos un problema recuperando los usuarios" });
+    }
+  },
+  async getInfo(req, res) {
+    try {
+      const user = await User.findById(req.user._id).populate({
+        path: "likes",
+        // populate: {
+        //   path: "commentIds",
+        // },
+      });
+      // .populate("likeIDs")
+      res.send(user);
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({
+          message: "Ha habido un problema al cargar la información del usuario",
+        });
     }
   },
 };
