@@ -11,9 +11,9 @@ const CommentController = {
         const comment = await Comment.create({
           ...req.body,
           userId: req.user._id,
-          routeId: req.params._id,
+          routeId: req.body.routeId,
         });
-        await Route.findByIdAndUpdate(req.params._id, {
+        await Route.findByIdAndUpdate(req.body.routeId, {
           $push: { commentsId: comment._id },
         });
         await User.findByIdAndUpdate(req.user._id, {
