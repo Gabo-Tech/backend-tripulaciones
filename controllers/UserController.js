@@ -108,6 +108,20 @@ const UserController = {
         });
     }
   },
+  async update(req, res) {
+    try {
+      const updatedUser = {
+        apiUser: req.body.user_id        
+      };
+      const user = await User.findByIdAndUpdate(req.user._id, updatedUser, {
+        new: true
+      });
+      res.status(201).send({ message: "Usuario modificado con éxito", user })
+    } catch (error) {
+      console.error(error);
+      res.status(400).send({ message: "Hubo un problema al intentar modificar el usuario" })
+    }
+  },
 };
 
 module.exports = UserController;

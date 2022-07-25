@@ -21,6 +21,7 @@ const UserSchema = new mongoose.Schema({
     tokens:[],
     confirmed: Boolean,
     role: String,
+    apiUser: Number,
     commentIds: [{ type: ObjectId, ref: "Comment"}],
     likes: [{ type: ObjectId, ref: 'Route' }],
     ratingId: [{
