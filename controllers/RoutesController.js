@@ -54,10 +54,10 @@ const RoutesController = {
   },
   async getAll(req, res) {
     try {
-      const { page = 1, limit = 10 } = req.query;
+      // const { page = 1, limit = 10 } = req.query;
       const routes = await Route.find()
-        .limit(limit * 1)
-        .skip((page - 1) * limit);
+        // .limit(limit * 1)
+        // .skip((page - 1) * limit);
       res.send(routes);
     } catch (error) {
       console.log(error);
