@@ -55,9 +55,9 @@ const RoutesController = {
   async getAll(req, res) {
     try {
       // const { page = 1, limit = 10 } = req.query;
-      const routes = await Route.find()
-        // .limit(limit * 1)
-        // .skip((page - 1) * limit);
+      const routes = await Route.find();
+      // .limit(limit * 1)
+      // .skip((page - 1) * limit);
       res.send(routes);
     } catch (error) {
       console.log(error);
@@ -121,6 +121,21 @@ const RoutesController = {
       res
         .status(500)
         .send({ message: "Hubo un problema con tu dislike a la ruta" });
+    }
+  },
+  async getRoutesByName(req, res) {
+    try {
+      const name = new RegExp(req.params.name, "i");
+      const RoutesCollection = await Route.find({ name });
+      if (RoutesCollection === null) {
+        res
+          .status(400)
+          .send({ message: "Sorry, we can't find that RoutesCollection" });
+        return;
+      }
+      res.send(RoutesCollection);
+    } catch (error) {
+      console.log(error);
     }
   },
 };
