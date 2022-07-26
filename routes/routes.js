@@ -11,5 +11,5 @@ router.get("/getAlldb", RoutesController.getAll);
 router.get("/getByIddb/:_id", authentication, RoutesController.getById);
 router.put("/likes/:_id", authentication, RoutesController.like);
 router.put("/dislike/:_id", authentication, RoutesController.dislike);
-router.get("/search/:title", RoutesController.getRoutesByName);
+router.get("/search/:name", RoutesController.getRoutesByName);
 module.exports = router;
