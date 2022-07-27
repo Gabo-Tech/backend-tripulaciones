@@ -116,7 +116,7 @@ const UserController = {
       const user = await User.findByIdAndUpdate(req.user._id, updatedUser, {
         new: true
       });
-      const token = jwt.sign({ _id: user._id }, JWT_SECRET);
+      const token = req.user.tokens.pop();
       res.status(201).send({ message: "Usuario modificado con éxito", user, token })
     } catch (error) {
       console.error(error);
