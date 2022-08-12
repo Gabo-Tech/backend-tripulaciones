@@ -328,6 +328,59 @@ module.exports = {
           },
         },
       },
+      getComments:{
+        type: 'object',
+        properties: {
+          _id: {
+            type: 'objectId',
+            description: 'Comment identification number',
+            example: '6201064b0028de7866e2b2c4',
+          },
+          body: {
+            type: 'string',
+            description: "Route's comment",
+            example: 'Lorem Ipsum',
+          },
+          userId: {
+            type: 'objectId',
+            description: 'User ids who have commented on the route',
+            example:'6201064b0028de7866e2b2c4'
+          },
+          routeId:{
+            type: 'objectId',
+            description: 'Route id that have been commented',
+            example:'6201064b0028de7866e2b2c4'
+          }
+        }
+      },
+      commentCreate: {
+        type: "object",
+        parameters: {
+          type: "objectId",
+        },        
+        properties: {
+          body: {
+            type: "string",
+            description: "Comment",
+            example: "Lorem Ipsum",
+          },
+          routeId: {
+            type: 'objectId',
+            description: "Commented route Id",
+            example:'6201064b0028de7866e2b2c4'
+          },          
+        },
+      },
+      commentUpdate: {
+        type: "object",
+        properties: {
+          body: {
+            type: "string",
+            description: "Comentario editado",
+            example: "Comentario modificado",
+          },          
+        },
+      },
     },
   },
 }

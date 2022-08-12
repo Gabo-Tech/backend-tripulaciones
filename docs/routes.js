@@ -9,7 +9,7 @@ module.exports = {
         operationId: 'getRoutes',
         parameters: [],
         responses: {
-          200: {
+          201: {
             description: 'Routes were obtained',
             content: {
               'application/json': {
@@ -44,7 +44,7 @@ module.exports = {
           },
         ],
         responses: {
-          200: {
+          201: {
             description: 'Route were obtained',
             content: {
               'application/json': {
@@ -80,7 +80,7 @@ module.exports = {
           },
         ],
         responses: {
-          200: { 
+          201: { 
             description: "The route has been liked" ,
             content: {
               'application/json': {
@@ -117,7 +117,7 @@ module.exports = {
           },
         ],
         responses: {
-          200: { 
+          201: { 
             description: "The route has been disliked" ,
             content: {
               'application/json': {
@@ -149,7 +149,7 @@ module.exports = {
           },
         ],
         responses: {
-          200: {
+          201: {
             description: 'Route were obtained',
             content: {
               'application/json': {
@@ -159,6 +159,126 @@ module.exports = {
               },
             },
           },
+        },
+      },
+    },
+    '/comments/': {
+      get: {
+        security: [
+          {
+            ApiKeyAuth: [],
+          },
+        ],
+        tags: {
+          Comments: ' Get all comments',
+        },
+        description: 'Get comments',
+        operationId: 'getComments',
+        parameters: [],
+        responses: {
+          201: {
+            description: 'Comments were obtained',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/getComments',
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    '/comments/': {
+      post: {
+        security: [
+          {
+            ApiKeyAuth: [],
+          },
+        ],
+        tags: {
+          Comments: ' Create a comment',
+        },
+        description: "Create a new comment on a route",
+        operationId: "createComments",
+        parameters: [
+          {
+            in: 'body',
+            name: 'comment',
+            schema: {
+              $ref: "#/components/schemas/commentCreate"
+            },
+          },
+          
+        ],        
+        responses: {
+          201: { description: "Comment created successfully" },
+          500: { description: "Server error" },
+        },
+      },
+    },
+    '/comments/id/{commentId}': {
+      put: {
+        security: [
+          {
+            ApiKeyAuth: [],
+          },
+        ],
+        tags: {
+          Comenatrios: " Update comment",
+        },
+        description: "Edit a comment",
+        operationId: "updateComment",
+        parameters: [
+          {
+            in: "path",
+            name: "commentId",
+            schema: {
+              type: "objectId",
+            },
+          },
+        ],
+        requestBody: {
+          content: {
+            "multipart/form-data": {
+              schema: {
+                $ref: "#/components/schemas/commentUpdate",
+              },
+            }            
+          },
+        },
+        responses: {
+          201: { description: "Comment updated successfully" },
+          404: { description: "Comment not found" },
+          500: { description: "Server Error" },
+        },
+      },
+    },
+    '/comments/comment/{id}': {
+      delete: {
+        security: [
+          {
+            ApiKeyAuth: [],
+          },
+        ],
+        tags: {
+          Comentarios: ' Delete comment',
+        },
+        description: 'Delete a comment',
+        operationId: 'deleteComment',
+        parameters: [
+          {
+            in: 'path',
+            name: 'id',
+            schema: {
+              type: 'objectId',
+            },
+          },
+        ],
+        responses: {
+          201: { description: 'Comment deleted succesfully' },
+          404: { description: 'Comment not found' },
+          500: { description: 'Server Error' },
         },
       },
     },

@@ -5,5 +5,5 @@ const routes = require('./routes');
 module.exports = {
   ...basicInfo,
   ...routes,
-  ...components
+  ...components  
 };
