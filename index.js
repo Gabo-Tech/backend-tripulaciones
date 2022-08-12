@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 3001;
 const { dbConnection } = require("./config/config");
 const cors = require("cors");
+const swaggerUI = require('swagger-ui-express');
+const docs = require('./docs/index');
 
 dbConnection();
 
@@ -24,5 +26,7 @@ app.use("/ratings", require("./routes/ratings"));
 app.use(typeError);
 
 module.exports = app;
+
+app.use('/api-docs', swaggerUI.serve,swaggerUI.setup(docs));
 
 app.listen(PORT, console.info(`Server running on port: ${PORT}...`));
