@@ -95,5 +95,72 @@ module.exports = {
         },
       }
     },
+    '/routes/dislike/{_id}': {
+      put: {
+        security: [
+          {
+            ApiKeyAuth: [],
+          }
+        ],
+        tags: {
+          Routes : ' Dislike route',
+        },
+        description: 'Dislike a route',
+        operationId: 'dislikeRoute',
+        parameters: [
+          {
+            in: "path",
+            name: "_id",
+            schema: {
+              type: "objectId",
+            },
+          },
+        ],
+        responses: {
+          200: { 
+            description: "The route has been disliked" ,
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/dislikeRoute',
+                },
+              },
+            },
+          },
+          404: { description: "Route not found" },
+          500: { description: "Server error" },
+        },
+      }
+    },
+    '/routes/search/{name}': {
+      get: {
+        tags: {
+          Routes : ' Search by name',
+        },
+        description: 'Search route by name',
+        operationId: 'getRoutesByName',
+        parameters: [
+          {
+            in: "path",
+            name: "name",
+            schema: {
+              type: "objectId",
+            },
+          },
+        ],
+        responses: {
+          200: {
+            description: 'Route were obtained',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/getByName',
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   },
 };
