@@ -1,40 +1,8 @@
-<!-- LOGO -->
-
-<p align="center">
-  <img width="400" height="240" src='./assets/redsocial.jpg'>
-</p>
-
-<!-- INDICE -->
-<details>
-  <summary>Indice</summary>
-  <ol>
-    <li>
-      <a href="#introduccion">Introducción</a>
-      <ul>
-        <li><a href="#hecho-con">Tecnologías</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#descripción-del-proyecto">Descripción del proyecto</a>
-      <ul>
-        <li><a href="#instalación">Instalación</a></li>
-      </ul>
-    </li>
-    <li><a href="#endpoints">Endpoints</a></li>
-    <li><a href="#licencia">Licencia</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-    <li><a href="#conocimientos">Conocimientos</a></li>
-  </ol>
-</details>
-
 <!-- SOBRE EL PROYECTO -->
 
 ## Introducción
 
-En el proyecto de backend se combinará los conocimientos adquiridos en las
-tecnologías node + express, además de MongoDB/mongoose.
-El proyecto consistirá en una red social.
-
+Backend de App de rutas como proyecto final de Bootcamp. La App debe mostrar un listado de rutas que se pueden añadir a favoritos y comentarlas. Se rellena un formulario y un modelo de machine learning desarrollado por nuestros compañeros de Data Science nos devuelve una ruta recomendada para el usuario.
 
 ### Tecnologías
 
@@ -49,8 +17,8 @@ Aquí presentamos las herramientas empleadas en este proyecto:
 - [Bcryptjs](https://www.npmjs.com/package/bcryptjs)
 - [JWT](https://jwt.io/)
 - [Heroku](https://www.heroku.com)
-- [Jest](https://jestjs.io/)
-- [nodemailer-mock](https://github.com/doublesharp/nodemailer-mock#readme)
+- [Swagger](https://swagger.io/)
+- [dotenv](https://www.npmjs.com/package/dotenv)
 
 <!-- DESCRIPCION -->
 
@@ -61,91 +29,45 @@ que el alumno desarrolle una API REST que sea capaz de lo siguiente:
 
 
 - Registro de usuarios usando Bcrypt.
-- Login de usuarios + token + middleware.
-- Que sea capaz de crear un CRUD.
-- Dar/quitar Like a post.
+- Login/Logout de usuarios + token + middleware.
+- Que sea capaz de crear un CRUD (routes, users, comments, ratings).
+- Dar/quitar Like a ruta.
 - Backend disponible en producción (Heroku).
 
 ### Instalación
 
-1. Para la instalación de la aplicación has de clonarte el siguiente repositorio:
+1. Para la instalación en local de la aplicación has de clonarte el siguiente repositorio:
 
    ```sh
-   git clone https://github.com/Yorch82/Red-Social-Mongoose.git
+   git clone https://github.com/Yorch82/backend-tripulaciones.git
    ```
 
 2. Tambien has de instalar las dependencias del proyecto:
    ```sh
    npm install
    ```
-3. Seeders:
-    ```sh
-   npm run data:destroy -> Vacía la Base de datos
-   npm run data:import -> Rellena colecciones con datos de prueba
-   ```
-4. Testing:
-    ```sh
-    Cambiar valor variable DB = false en .env    
-    npm test:watch
-   ```
+3. Finalmente hay que configurar el archivo .env
 
+4. Si no deseas clonarte el repositorio el proyecto está desplegado en Heroku en el siguiente enlace:
+    ```sh
+    https://routeu-backend.herokuapp.com/
+    ```
 <!-- EJEMPLOS DE USO -->
-
 ## Endpoints
 
 Enlace a la documentación de Postman:
 
    ```sh
-    https://documenter.getpostman.com/view/21013418/Uz5KkEKu
+    https://www.getpostman.com/collections/8cd8da9b9ffd8ee6a3f3
+   ```
+Enlace a la documentación de Swagger:
+
+   ```sh
+    https://routeu-backend.herokuapp.com/api-docs/
    ```
 
-Esta es una lista de los Endpoints del proyecto que puedes ejecutar en Postman:
 
-USUARIOS:
 
-| Metodo | Endpoint                       | Rol     | Funcion                               |
-| ------ | ------------------------------ | ------- | ------------------------------------- |
-| POST   | `/users/`                      | user    | Crear nuevo usuario                   |
-| POST   | `/users/login`                 | user    | Login                                 |
-| PUT    | `/users/logout`                | user    | Logout                                |
-| GET    | `/users/getLoggedUser`         | user    | Obtienes usuario loggeado             |
-| PUT    | `/users/likes/:_id`            | user    | Dar Like a post                       |
-| PUT    | `/users/dislikes/:_id`         | user    | Quitar like a post                    |
-| PUT    | `/users/likeComment/:_id`      | user    | Dar like a comentario                 |
-| PUT    | `/users/dislikeComment/:id`    | user    | Quitar like a comentario              |
-| GET    | `/users/getById/:_id`          | admin   | Recupera un usuario por ID            |
-| GET    | `/users/getByName/:_id_`       | admin   | Recupera un Usuario por nombre        |
-| PUT    | `/users/follow/:_id`           | user    | Seguir a un usuario                   |
-| PUT    | `/users/unfollow/:_id`         | user    | Dejar de seguir a usuario             |
-| GET    | `/users/getAll     `           | admin   | Crear pedido                          |
-
-POST:
-
-| Metodo | Endpoint                       | Rol     | Funcion                               |
-| ------ | ------------------------------ | ------- | ------------------------------------- |
-| POST   | `/posts/`                      | user    | Crear nuevo post                      |
-| DELETE | `/posts/delete/:_id            | user    | Borrar pos por ID                     |
-| PUT    | `/posts/update/:_id`           | user    | Actualizar post por ID                |
-| GET    | `/posts/getAll`                | admin   | Recupera todos los posts              |
-| GET    | `/posts/getById/:_id`          | admin   | Recupera post por ID                  |
-| GET    | `/posts/getByName/:title`      | admin   | Recupera post por Nombre              |
-
-COMMENTS
-
-| Metodo | Endpoint                       | Rol     | Funcion                               |
-| ------ | ------------------------------ | ------- | ------------------------------------- |
-| POST   | `/comments/`                   | user    | Crear nuevo comentario                |
-| GET    | `/comments/getAll`             | admin   | Recupera todos los comentarios        |
-| PUT    | `/comments/update/:_id`        | user    | Actualiza comentario                  |
-| DELETE | `/comments/delete/:_id`        | user    | Borra comentario                      |
-
-<!-- ROADMAP -->
-
-## Experiencia
-
-- [x] Implementado testing con Jest teniendo que ahcer mocking a nodemailer para que no falle el test.
-- [x] Implementado modelo seeders "casero"
-- [x] Hemos perfeccionado la realización de pruebas API con el uso de Postman.
 
 <!-- LICENCIA -->
 
@@ -157,15 +79,12 @@ Este programa es de código abierto y puede ser utilizado por cualquier persona 
 
 ## Contacto
 
-Jorge - [gitHub](https://github.com/yorch82)
+David Úbeda - [gitHub](https://github.com/Dubesor22)
 
-<!-- CONCOCIMIENTOS -->
+Gabriel Clemente - [gitHub](https://github.com/Gabo-Tech)
 
-## Conocimientos
+Jorge Campo - [gitHub](https://github.com/yorch82)
 
-- [x] Uso de Node.js
-- [x] MongoDB
-- [x] Mongoose
-- [x] Deploy Heroku
-- [x] Testing con Jest
-- [x] Swagger
+
+
+
