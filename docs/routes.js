@@ -3,7 +3,7 @@ module.exports = {
     '/routes/getAlldb': {
       get: {
         tags: {
-          Routes : ' Get Routes',
+          Routes : ' Get all routes',
         },
         description: 'Get routes',
         operationId: 'getRoutes',
@@ -14,7 +14,7 @@ module.exports = {
             content: {
               'application/json': {
                 schema: {
-                  $ref: '#/components/schemas/getRoute',
+                  $ref: '#/components/schemas/getRoutes',
                 },
               },
             },
@@ -30,7 +30,7 @@ module.exports = {
           },
         ],
         tags: {
-          Routes : ' Get Routes by Id',
+          Routes : ' Get route by Id',
         },
         description: 'Get routes by Id',
         operationId: 'getRoutesById',
@@ -57,6 +57,43 @@ module.exports = {
           500: { description: "Server error" },
         },
       },
+    },
+    '/routes/likes/{_id}': {
+      put: {
+        security: [
+          {
+            ApiKeyAuth: [],
+          }
+        ],
+        tags: {
+          Routes : ' Like route',
+        },
+        description: 'Like a route',
+        operationId: 'likeRoute',
+        parameters: [
+          {
+            in: "path",
+            name: "_id",
+            schema: {
+              type: "objectId",
+            },
+          },
+        ],
+        responses: {
+          200: { 
+            description: "The route has been liked" ,
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/likeRoute',
+                },
+              },
+            },
+          },
+          404: { description: "Route not found" },
+          500: { description: "Server error" },
+        },
+      }
     },
   },
 };
