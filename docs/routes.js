@@ -225,7 +225,7 @@ module.exports = {
           },
         ],
         tags: {
-          Comenatrios: " Update comment",
+          Comments: " Update comment",
         },
         description: "Edit a comment",
         operationId: "updateComment",
@@ -262,7 +262,7 @@ module.exports = {
           },
         ],
         tags: {
-          Comentarios: ' Delete comment',
+          Comments: ' Delete comment',
         },
         description: 'Delete a comment',
         operationId: 'deleteComment',
