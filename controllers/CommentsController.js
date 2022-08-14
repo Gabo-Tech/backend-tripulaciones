@@ -19,7 +19,7 @@ const CommentController = {
         await User.findByIdAndUpdate(req.user._id, {
           $push: { commentIds: comment._id },
         });
-        res.status(201).send({message: "comentario creado", comment});
+        res.status(201).send({message: "Comment created", comment});
        
     } catch (error) {
       console.log(error);
@@ -30,10 +30,10 @@ const CommentController = {
   async delete(req, res) {
     try {
       const comment = await Comment.findByIdAndDelete(req.params._id);
-      res.send({ comment, message: "Comentario borrado" });
+      res.send({ comment, message: "Comment deleted" });
     } catch (error) {
       console.error(error);
-      res.status(500).send({ message: "Error al borrar el comentario" });
+      res.status(500).send({ message: "Error deleting comment" });
     }
   },
   async update(req, res) {
@@ -43,7 +43,7 @@ const CommentController = {
         req.body,
         { new: true }
       );
-      res.send({ message: "actualizado", comment });
+      res.send({ message: "Updated", comment });
     } catch (error) {
       console.error(error);
     }

@@ -16,7 +16,7 @@ const RoutesController = {
       res.status(201).send([RoutesCollection]);
     } catch (error) {
       console.error(error);
-      res.send({ message: "Hubo un problema obteniendo las rutas" });
+      res.send({ message: "There was a problem getting the routes" });
     }
   },
   async getRouteById(req, res) {
@@ -27,7 +27,7 @@ const RoutesController = {
       res.status(201).send([result.data]);
     } catch (error) {
       console.error(error);
-      res.send({ message: "Hubo un problema obteniendo la ruta" });
+      res.send({ message: "There was a problem getting the route" });
     }
   },
   async getAllPois(req, res) {
@@ -38,7 +38,7 @@ const RoutesController = {
       res.status(201).send([result.data]);
     } catch (error) {
       console.error(error);
-      res.send({ message: "Hubo un problema obteniendo los pois" });
+      res.send({ message: "There was a problem getting the pois" });
     }
   },
   async getPoiById(req, res) {
@@ -49,7 +49,7 @@ const RoutesController = {
       res.status(201).send([result.data]);
     } catch (error) {
       console.error(error);
-      res.send({ message: "Hubo un problema obteniendo el poi" });
+      res.send({ message: "There was a problem getting the poi" });
     }
   },
   async getAll(req, res) {
@@ -61,7 +61,7 @@ const RoutesController = {
       res.send(routes);
     } catch (error) {
       console.log(error);
-      res.status(500).send({ message: "Hubo un problema cargando las rutas" });
+      res.status(500).send({ message: "There was a problem loading the routes" });
     }
   },
   async getById(req, res) {
@@ -77,14 +77,14 @@ const RoutesController = {
       console.error(error);
       res
         .status(500)
-        .send({ message: "Ha habido un problema al cargar la ruta" });
+        .send({ message: "There was a problem loading the route" });
     }
   },
   async like(req, res) {
     try {
       const route = await Route.findById(req.params._id);
       if (route.likes.includes(req.user._id)) {
-        res.send("Ya le diste a like a esta ruta");
+        res.send("You already liked this route");
       } else {
         const route = await Route.findByIdAndUpdate(
           req.params._id,
@@ -101,7 +101,7 @@ const RoutesController = {
     } catch (error) {
       res
         .status(500)
-        .send({ message: "Hubo un problema con tu like a la ruta" });
+        .send({ message: "Server error" });
     }
   },
   async dislike(req, res) {
@@ -120,7 +120,7 @@ const RoutesController = {
     } catch (error) {
       res
         .status(500)
-        .send({ message: "Hubo un problema con tu dislike a la ruta" });
+        .send({ message: "There was a problem with your dislike to the route" });
     }
   },
   async getRoutesByName(req, res) {
@@ -130,7 +130,7 @@ const RoutesController = {
       if (RoutesCollection === null) {
         res
           .status(400)
-          .send({ message: "Sorry, we can't find that RoutesCollection" });
+          .send({ message: "Sorry, we can't find the Route you are looking for" });
         return;
       }
       res.send(RoutesCollection);
