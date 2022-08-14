@@ -1,5 +1,138 @@
 module.exports = {
   paths: {
+    "/users": {      
+      get: {
+        tags: {
+          Users: " Get all users",
+        },
+        description: "Get all registered users in the database",
+        operationId: "getAllUsers",
+        parameters: [],
+        responses: {
+          201: {
+            description: "Users were obtained",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/getAllUsers",
+                },
+              },
+            },
+          },
+          500: { description: "Server Error" },
+        },
+      },
+      post: {
+        tags: {
+          Users: " User register",
+        },
+        description:" Create a new user",
+        operationId: "createUsers",
+        parameters: [],
+        requestBody: {
+          content: {
+            "multipart/form-data": {
+              schema: {
+                $ref: "#/components/schemas/userCreate",
+              },
+            },            
+          },
+        },
+        responses: {
+          200: { description: "User created succesfully" },
+          500: { description: "Server error" },
+        },
+      },
+      delete: {
+        security: [
+          {
+            ApiKeyAuth: [],
+          },
+        ],
+        tags: {
+          Users: " Delete user",
+        },
+        description: "Delete an user",
+        operationId: "deleteUser",
+        parameters: [],
+        responses: {
+          200: { description: "User deleted succesfully" },
+          404: { description: "User not found" },
+          500: { description: "Server error" },
+        },
+      },
+      put: {
+        security: [
+          {
+            ApiKeyAuth: [],
+          },
+        ],
+        tags: {
+          Users: " Update user",
+        },
+        description: "Update user profile",
+        operationId: "updateUser",
+        parameters: [],
+        requestBody: {
+          content: {
+            "multipart/form-data": {
+              schema: {
+                $ref: "#/components/schemas/userUpdate",
+              },
+            },            
+          },
+        },
+        responses: {
+          200: { description: "User updated succesfully" },
+          404: { description: "User not found" },
+          500: { description: "Server error" },
+        },
+      },
+    },
+    "/users/login": {
+      post: {
+        tags: {
+          Users: " User login",
+        },
+        description: "Connect the user",
+        operationId: "loginUser",
+        parameters: [],
+        requestBody: {
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/userLogin",
+              },
+            },
+          },
+        },
+        responses: {
+          201: { description: "User connected successfully" },
+          404: { description: "User not found" },
+          500: { description: "Server error" },
+        },
+      },
+    },
+    "/users/logout": {
+      delete: {
+        security: [
+          {
+            ApiKeyAuth: [],
+          },
+        ],
+        tags: {
+          Users: " User logout",
+        },
+        description: "Disconnect the user",
+        operationId: "deleteUser",
+        parameters: [],
+        responses: {
+          200: { description: "User logged out successfully" },
+          404: { description: "User not found" },
+          500: { description: "Server error" },
+        },
+      },
+    },
     '/routes/getAlldb': {
       get: {
         tags: {

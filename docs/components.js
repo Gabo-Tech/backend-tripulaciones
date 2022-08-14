@@ -8,6 +8,100 @@ module.exports = {
         },
       },
     schemas: {
+      getAllUsers: {
+        type: "object",
+        properties: {
+          _id: {
+            type: "objectId",
+            description: "User ID",
+            example: "6201064b0028de7866e2b2c4",
+          },
+          name: {
+            type: "string",
+            description: "User name",
+            example: "Yorch",
+          },
+          email: {
+            type: "string",
+            description: "User Email",
+            example: "yorch@gmail.com",
+          },
+          role: {
+            type: "string",
+            description: "User rol",
+            example: "User",
+          },
+        },
+      },
+      userCreate: {
+        type: "object",
+        properties: {
+          password: {
+            type: "string",
+            description: "User password",
+            example: "123456",
+          },
+          name: {
+            type: "string",
+            description: "User name",
+            example: "Yorch",
+            required: true,
+          },
+          email: {
+            type: "string",
+            description: "User Email",
+            example: "yorch@gmail.com",
+            required: true,
+            unique: true,
+          },          
+          genre: {
+            type: "string",
+            description: "User genre",
+            required: true,
+            example: "Male",
+          },
+        },
+      },
+      userUpdate: {
+        type: "object",
+        properties: {
+          name: {
+            type: "string",
+            description: "User name",
+            example: "Yorch",
+          },
+          email: {
+            type: "string",
+            description: "User email",
+            example: "yorch@gmail.com",
+            required: true,
+            unique: true,
+          },          
+          genre: {
+            type: "string",
+            description: "Género del usuario",
+            required: true,
+            example: "Other",
+          },
+        },
+      },      
+      userLogin: {
+        type: "object",
+        properties: {
+          email: {
+            type: "string",
+            description: "Email del usuario",
+            example: "test@gmail.com",
+            required: true,
+          },
+          password: {
+            type: "string",
+            description: "Contraseña del usuario",
+            example: "123456",
+            required: true,
+          },
+        },
+      },
       getRoutes: {
         type: 'object',
         properties: {
